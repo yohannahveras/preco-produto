@@ -1,4 +1,4 @@
 package entities;
 
-public class ProdutoImportado {
+public class ProdutoImportado extends Produto{
 }
