@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.List;
+
 public class Produto {
     protected String nome;
     protected Double preco;

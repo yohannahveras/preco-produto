@@ -25,7 +25,7 @@ public class ProdutoUsado extends Produto {
                 + " (usado)"
                 + " R$ "
                 + String.format("%.2f", getPreco())
-                + "(Data de fabricação: "
+                + " (Data de fabricação: "
                 + dataFabricacao.format(DateTimeFormatter.ofPattern("dd/MM/yy"))
                 + ")";
     }

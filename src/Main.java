@@ -1,17 +1,49 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import entities.Produto;
+import entities.ProdutoImportado;
+import entities.ProdutoUsado;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
-
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        Scanner sc = new Scanner(System.in);
+        List<Produto> listaProdutos = new ArrayList<>();
+        System.out.println("Digite a quantidade de produtos: ");
+        int n = sc.nextInt();
+        for (int i = 1; i<= n; i++) {
+            System.out.println("Dados do produto " + i + ":");
+            System.out.print("Comum, usado ou importado? (c/u/i): ");
+            char tipo = sc.next().charAt(0);
+            System.out.print("Nome: ");
+            sc.nextLine();
+            String nome = sc.nextLine();
+            System.out.print("Preço: ");
+            Double preco = sc.nextDouble();
+            if (tipo == 'c') {
+                listaProdutos.add(new Produto(nome, preco));
+            }
+            else if (tipo == 'u') {
+                sc.nextLine();
+                System.out.print("Data de fabricação: ");
+                LocalDate dataFabricacao = LocalDate.parse(sc.next(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                listaProdutos.add(new ProdutoUsado(nome, preco, dataFabricacao));
+            }
+            else {
+                sc.nextLine();
+                System.out.print("Taxa da alfândega: ");
+                Double taxaAlfandega = sc.nextDouble();
+                listaProdutos.add(new ProdutoImportado(nome, preco, taxaAlfandega));
+            }
         }
+
+        System.out.println("TAG DE PREÇOS:");
+        for (Produto produtos : listaProdutos){
+            System.out.println(produtos.tagPreco());
+        }
+
+        sc.close();
     }
 }
